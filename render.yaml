@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: agro-rent-api
+    env: node
+    rootDir: backend
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/ready
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        value: https://agro-rent-frontend.onrender.com
+      - key: CORS_ORIGINS
+        value: https://agro-rent-frontend.onrender.com
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: LOG_LEVEL
+        value: info
+      - key: AUTH_RATE_LIMIT_MAX
+        value: 10
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+  - type: web
+    name: agro-rent-frontend
+    env: static
+    rootDir: frontend
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://agro-rent-api.onrender.com/api

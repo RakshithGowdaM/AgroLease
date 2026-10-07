@@ -1,0 +1,18 @@
+{
+  "name": "agro-rent-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "preview:frontend": "npm run preview --prefix frontend",
+    "start:backend": "npm run start --prefix backend",
+    "seed:backend": "npm run seed --prefix backend"
+  }
+  ,
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
